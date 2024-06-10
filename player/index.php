@@ -122,7 +122,7 @@ video {
 <body>
     <div id="glow"></div>
     <div id="container">
-    
+    <div id = "header">
     <?php
 session_start();
 error_reporting(E_ALL);
@@ -135,13 +135,16 @@ if (isset($_SESSION['name']) && isset($_SESSION['user_name'])) {
     $name = $_SESSION['name'];
     //$id = $_SESSION['id'];
 
-    echo "<h1>Welcome, <a href = './login/home.php' style = 'text-decoration:none;'> $name</a></h1>";
+    echo "<h1>Welcome, <a href = './login/home.php' style = ' color:white;'> $name</a></h1>";
+    ?>
+    
+<?php
 } else {
-    echo '<a href="./login/index.php"><p>Login</p></a>';
+    echo '<a href="./login/index.php"><p style = "text-decoration:none; color:white; text-align:left;">Login</p></a>';
 }
 ?>
 
-        <div id = "header"><h1>VIDEO PLAYER</h1><br><h3 style = "color:green;">made by @bamuelSarfi</h3><a href = "192.168.1.179:8080/index.html"></a></div><p>Return...</p></a>
+        <h1>VIDEO PLAYER</h1><br><h3 style = "color:green;">made by @bamuelSarfi</h3></div><a href = "../index.html"><p>Return...</p></a>
         <div id="container2" data-mouse-down-at="0">
             
                 <div id = "card" style = "order:1;"><p draggable="false"><a href="player/videos/Osama_Rap.mov" data-src="Osama_Rap.mov">Video 1</a></p></div>

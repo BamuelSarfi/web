@@ -1,0 +1,28 @@
+body{
+    background-color:#008F8C;
+    overflow-x: hidden;
+    font-family:monospace;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+#container{
+    background-color: #0d4241;
+    width:40vh;
+    height:40vh;
+    border-radius:24px;
+    margin-top: 29vh;
+    overflow: hidden;
+    padding:20px;
+    color:white;
+}
+#empty{
+    background-color: white;
+    width:40vh;
+    height:8%;
+    border-radius:24px;
+    margin-top: 29vh;
+}
+h1{
+    margin-top: none;
+}
