@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍫👨🏿</title>
+</head>
+<body>
+    <style>
+        body{
+            overflow: hidden;
+            background-color: #008F8C;
+            margin: 0;
+            padding: 0;
+        }
+        video{
+            align-items: center;
+        }
+    </style>
+    
+    <video src="videos/IMG_1240.MOV" autoplay id = "video"></video>
+
+    <script defer>
+        window.addEventListener('load', setupScreen);
+        window.addEventListener('resize', setupScreen);
+        const video = document.getElementById('video');
+        function setupScreen(){
+            
+            if(video){
+                video.style.width = window.innerWidth + 'px';
+                video.style.height = window.innerHeight + 'px';
+            }
+        }
+        video.onended = function() {
+            window.close();
+        }
+    </script> 
+</body>
+</html>
