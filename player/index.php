@@ -116,6 +116,9 @@ video {
     cursor: pointer;
     transition-duration:0.3s;
 }
+button{
+    margin-bottom:20px;
+}
 
     </style>
 </head>
@@ -136,9 +139,13 @@ if (isset($_SESSION['name']) && isset($_SESSION['user_name'])) {
     //$id = $_SESSION['id'];
 
     echo "<h1>Welcome, <a href = './login/home.php' style = ' color:white;'> $name</a></h1>";
+    if($_SESSION['id'] != 1){
+    }else {   
     ?>
     
+        <a href = "./admin/upload.php"><p style = "text-decoration:none; color:white; text-align:left;">Upload a video</p></a>
 <?php
+    }    
 } else {
     echo '<a href="./login/index.php"><p style = "text-decoration:none; color:white; text-align:left;">Login</p></a>';
 }
@@ -242,6 +249,48 @@ if (isset($_SESSION['name']) && isset($_SESSION['user_name'])) {
             document.body.appendChild(glow);
         })
 
+        //upload
+        document.addEventListener("DOMContentLoaded", function() {
+    var videoList = document.getElementById("container2");
+    var videoPlayerDiv = document.getElementById("videoPlayer");
+
+    videoList.addEventListener("click", function(event) {
+        event.preventDefault();
+        if (event.target.tagName === "A") {
+            var videoSrc = "player/" + event.target.getAttribute("data-src");
+            var videoName = extractFileName(videoSrc);
+            loadVideoPlayer(videoSrc, videoName);
+        }
+    });
+
+    function extractFileName(url) {
+        var index = url.lastIndexOf("/") + 1;
+        return url.substr(index);
+    }
+
+    function loadVideoPlayer(videoSrc, videoName) {
+        videoPlayerDiv.innerHTML = `
+            <h2>${videoName}</h2>
+            <button id="closeBtn">&times;</button>
+            <video controls>
+                <source src="${videoSrc}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        `;
+        var closeBtn = document.getElementById("closeBtn");
+        closeBtn.addEventListener('click', () => {
+            videoPlayerDiv.innerHTML = ``;
+        });
+    }
+
+});  
+function addVideoCard(videoName, videoSrc) {
+        var newCard = document.createElement("div");
+        newCard.id = "card";
+        newCard.style.order = document.getElementById("container2").children.length + 1;
+        newCard.innerHTML = `<p draggable="false"><a href="player/${videoSrc}" data-src="${videoSrc}">${videoName}</a></p>`;
+        document.getElementById("container2").appendChild(newCard);
+    }
         
     </script>
 </body>
