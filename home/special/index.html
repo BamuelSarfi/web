@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special</title>
+</head>
+<body>
+    <style>
+        @font-face {
+            font-family: "Bahnscrift Semibold";
+            src: url("bahnschrift.ttf");
+        }
+        body{
+            background-color: rgb(233, 233, 76);
+        }
+        #main p{
+            font-size:100px;
+            margin: 0px;
+            padding: 0px;
+            font-family: "Bahnscrift Semibold";
+            width: fit-content;
+            color:rgb(78, 78, 26);
+        }
+        #main p:hover{
+            animation: roll 0.5s ease-out;
+            width:auto;
+        }
+        p:hover{
+            font-weight: bold;
+            transition-duration:0.3s;
+            cursor:pointer;
+            background-color:white;
+        }
+        #glitter{
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            color:black;
+            
+        }
+        @keyframes roll{
+            0%{
+                width:0%;
+            }
+            100%{
+                width:100%;
+            }
+        }
+    </style>
+
+    
+    <section id = "main">
+        <p onclick="window.open('../index.html');">Home</p>
+        <p onclick = "window.open('special.html');">Special</p>
+        <p>About</p>
+        <p>Contact</p>
+        <p>Blog</p>
+        
+    </section>
+
+    <script defer>
+    </script>
+</body>
+</html>

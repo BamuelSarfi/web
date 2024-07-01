@@ -62,8 +62,8 @@ video {
 #container2 {
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap; /* Allow wrapping */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 0.5fr));
     width: 100%;
     height:300px;
     overflow-y: "hidden";
@@ -126,12 +126,11 @@ button{
     <div id="glow"></div>
     <div id="container">
     <div id = "header">
-    <?php
+<?php
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-//include './login/login.php'; // Ensure this path is correct and the file exists
 //clunky code that does work
 if (isset($_SESSION['name']) && isset($_SESSION['user_name'])) {
     $uname = $_SESSION['user_name'];
@@ -142,8 +141,8 @@ if (isset($_SESSION['name']) && isset($_SESSION['user_name'])) {
     if($_SESSION['id'] != 1){
     }else {   
     ?>
-    
-        <a href = "./admin/upload.php"><p style = "text-decoration:none; color:white; text-align:left;">Upload a video</p></a>
+        //fix link
+        <a href = "#"><p style = "text-decoration:none; color:white; text-align:left;">Upload a video</p></a>
 <?php
     }    
 } else {
@@ -153,15 +152,19 @@ if (isset($_SESSION['name']) && isset($_SESSION['user_name'])) {
 
         <h1>VIDEO PLAYER</h1><br><h3 style = "color:green;">made by @bamuelSarfi</h3></div><a href = "../index.html"><p>Return...</p></a>
         <div id="container2" data-mouse-down-at="0">
-            
-                <div id = "card" style = "order:1;"><p draggable="false"><a href="player/videos/Osama_Rap.mov" data-src="Osama_Rap.mov">Video 1</a></p></div>
-                <div id = "card" style = "order:2;"><p draggable="false"><a href="player\videos\youtube-U7El9zP66zc.mov" data-src="youtube-U7El9zP66zc.mov">Video 2</a></p></div>
-                <div id = "card" style = "order:3;"><p draggable="false"><a href = "player\videos\0004-0020.mkv" data-src="0004-0020.mkv">Video 3</a></p></div>
-                <div id = "card" style = "order:4;"><p draggable="false"><a href = "player\videos\the_Santa_robbery_360p (1).mp4" data-src="the_Santa_robbery_360p (1).mp4">Video 4</a></p></div>
-                <div id = "card" style = "order:5;"><p draggable="false"><a href = "player\videos\y2mate.com_-_What_de_Helll_x_Paranoia_Kamikaze_transition_720p.mov" data-src="y2mate.com_-_What_de_Helll_x_Paranoia_Kamikaze_transition_720p.mov">Video 5</a></p></div>
-                <div id = "card" style = "order:6;"><p draggable="false"><a href="player\videos\lv_0_20230514114007.mp4" data-src="lv_0_20230514114007.mp4">Video 6</a></p></div>
-                <div id = "card" style = "order:7;"><p draggable="false"><a href = "player\videos\y2matego.com_-_Nate_what_are_you_doing_man_meme.mp4" data-src = "y2matego.com_-_Nate_what_are_you_doing_man_meme.mp4">Video 7</a></p></div>
-                <div id = "card" style = "order:8;"><p draggable="false"><a href = "player\videos\minecraft_autotune.mov.mp4" data-src="minecraft_autotune.mov.mp4">Video 8</a></p></div>
+        <?php 
+                $directory = __DIR__ . "/videos/";
+                $files = scandir($directory);
+
+                foreach ($files as $file) {
+                    if ($file != "." && $file != "..") {
+                        $filePath = $directory . $file; // Full path to the file
+                        echo "<div id='card'><p draggable='false'><a href='player/videos/$file' data-src='$file'>", substr($file, 0, 30), "</a></p></div>" . PHP_EOL;
+                    }
+                }
+        ?>
+
+                
         <!-- Add more video links as needed -->
             
         </div>
@@ -257,7 +260,7 @@ if (isset($_SESSION['name']) && isset($_SESSION['user_name'])) {
     videoList.addEventListener("click", function(event) {
         event.preventDefault();
         if (event.target.tagName === "A") {
-            var videoSrc = "player/" + event.target.getAttribute("data-src");
+            var videoSrc ="../player/videos/" + event.target.getAttribute("data-src");
             var videoName = extractFileName(videoSrc);
             loadVideoPlayer(videoSrc, videoName);
         }
@@ -284,13 +287,7 @@ if (isset($_SESSION['name']) && isset($_SESSION['user_name'])) {
     }
 
 });  
-function addVideoCard(videoName, videoSrc) {
-        var newCard = document.createElement("div");
-        newCard.id = "card";
-        newCard.style.order = document.getElementById("container2").children.length + 1;
-        newCard.innerHTML = `<p draggable="false"><a href="player/${videoSrc}" data-src="${videoSrc}">${videoName}</a></p>`;
-        document.getElementById("container2").appendChild(newCard);
-    }
+
         
     </script>
 </body>
